@@ -74,11 +74,11 @@ function createModal(user) {
           <p class="modal-text">${user.phone}</p>
           <p class="modal-text">${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state} ${user.location.postcode}</p>
           <p class="modal-text">Birthday: ${birthdayConverter(user)}</p>
-      </div>
-      <div class="modal-btn-container">
-      <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
-      <button type="button" id="modal-next" class="modal-next btn">Next</button>
-  </div>`;
+      </div>`
+  //     <div class="modal-btn-container">
+  //     <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
+  //     <button type="button" id="modal-next" class="modal-next btn">Next</button>
+  // </div>`;
 
   modContainer
     .querySelector("#modal-close-btn")
