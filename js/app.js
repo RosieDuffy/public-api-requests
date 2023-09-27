@@ -35,6 +35,10 @@ function createCard(people) {
       openModal(user);
     });
     gallery.appendChild(card);
+
+    card.style.background = "#9896f1";
+    card.style.boxShadow = "-10px 10px  10px #d59bf6";
+    card.style.border = "5px solid white";
   });
 }
 
@@ -56,9 +60,10 @@ function createModal(user) {
   const modContainer = document.createElement("div");
   modContainer.classList.add("modal-container");
   modContainer.id = "modal-container";
-   // prettier-ignore
+
+  // prettier-ignore
   modContainer.innerHTML =  `
-     <div class="modal">
+     <div class="modal" id="modal">
       <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
       <div class="modal-info-container">
           <img class="modal-img" src="${user.picture.large}" alt="profile picture">
@@ -69,16 +74,24 @@ function createModal(user) {
           <p class="modal-text">${user.phone}</p>
           <p class="modal-text">${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state} ${user.location.postcode}</p>
           <p class="modal-text">Birthday: ${birthdayConverter(user)}</p>
-      </div>`;
+      </div>
+      <div class="modal-btn-container">
+      <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
+      <button type="button" id="modal-next" class="modal-next btn">Next</button>
+  </div>`;
 
   modContainer
     .querySelector("#modal-close-btn")
     .addEventListener("click", closeModal);
   gallery.insertAdjacentElement("afterend", modContainer);
+  const modalbox = document.getElementById("modal");
+
+  modalbox.style.boxShadow = "-10px 10px  10px #d59bf6";
+  modalbox.style.backgroundColor = "#edb1f1";
+  modalbox.style.border = "5px solid white";
 }
 
-// Open and Close functions for employee modal windows // 
-
+// Open and Close functions for employee modal windows //
 
 function openModal(employee) {
   createModal(employee);
@@ -89,3 +102,30 @@ function closeModal() {
   document.getElementById("modal-container").style.display = "none";
   document.getElementById("modal-container").innerHTML = "";
 }
+
+// Styles //
+
+document.body.style.backgroundColor = "#8ef6e4";
+const header = document.querySelector(".header-text-container");
+header.style.fontFamily = "Londrina Solid, cursive";
+header.style.fontSize = "2em";
+
+// Search Bar //
+
+const searchContainer = document.querySelector(".search-container");
+searchContainer.innerHTML = `<form action="#" method="get">
+<input type="search" id="search-input" class="search-input" placeholder="Search...">
+<input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
+</form>`;
+const searchInput = document.getElementById("search-input");
+searchInput.addEventListener("keyup", (e) => {
+  let currentValue = e.target.value.toLowerCase();
+  let names = document.querySelectorAll(".card-name");
+  names.forEach((name) => {
+    if (name.textContent.toLowerCase().includes(currentValue)) {
+      name.parentNode.parentNode.style.display = "flex";
+    } else {
+      name.parentNode.parentNode.style.display = "none";
+    }
+  });
+});
