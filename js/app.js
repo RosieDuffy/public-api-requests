@@ -20,10 +20,11 @@ fetch("https://randomuser.me/api/?results=12&nat=us")
    modal is created when an employee card is clicked */
 
 function createCard(people) {
-  people.forEach((user) => {
+  people.forEach((user, index) => {
     const card = document.createElement("div");
     card.classList.add("card");
-    card.innerHTML = `<div class="card-img-container">
+    card.setAttribute("dataIndex", `${index}`);
+    card.innerHTML = `<div class="card-img-container" >
       <img class="card-img" src="${user.picture.medium}" alt="profile picture">
   </div>
   <div class="card-info-container">
@@ -75,15 +76,13 @@ function createModal(user) {
           <p class="modal-text">${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state} ${user.location.postcode}</p>
           <p class="modal-text">Birthday: ${birthdayConverter(user)}</p>
       </div>`
-  //     <div class="modal-btn-container">
-  //     <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
-  //     <button type="button" id="modal-next" class="modal-next btn">Next</button>
-  // </div>`;
+
 
   modContainer
     .querySelector("#modal-close-btn")
     .addEventListener("click", closeModal);
   gallery.insertAdjacentElement("afterend", modContainer);
+
   const modalbox = document.getElementById("modal");
 
   modalbox.style.boxShadow = "-10px 10px  10px #d59bf6";
@@ -129,3 +128,4 @@ searchInput.addEventListener("keyup", (e) => {
     }
   });
 });
+
